@@ -21,7 +21,7 @@ export const Actions = ({ store }) => {
   return (
     <Elem name="section">
       {store.hasInterface('annotations:view-all') && (
-        <Tooltip title="View all annotations">
+        <Tooltip title="查看所有標註">
           <Button
             icon={<IconViewAll />}
             type="text"
@@ -50,7 +50,7 @@ export const Actions = ({ store }) => {
             aria-label="Delete"
             onClick={() => {
               confirm({
-                title: 'Delete annotation',
+                title: '刪除標註',
                 body: 'This action cannot be undone',
                 buttonLook: 'destructive',
                 okText: 'Proceed',

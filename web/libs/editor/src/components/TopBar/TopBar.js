@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-
 import { IconViewAll, LsPlus } from '../../assets/icons';
 import { Button } from '../../common/Button/Button';
 import { Tooltip } from '../../common/Tooltip/Tooltip';
@@ -18,23 +17,36 @@ export const TopBar = observer(({ store }) => {
   const annotationStore = store.annotationStore;
   const entity = annotationStore?.selected;
   const isPrediction = entity?.type === 'prediction';
-
   const isViewAll = annotationStore?.viewingAll === true;
 
   return store ? (
     <Block name="topbar" mod={{ newLabelingUI: isFF(FF_DEV_3873) }}>
       {isFF(FF_DEV_3873) ? (
-        <Elem name="group">
+        <Elem name="group" style={{ display: 'flex', alignItems: 'center' }}>
+          <Button
+            className="topbar__button"
+            type="text"
+            aria-label="Home"
+            onClick={() => window.location.href = 'http://140.127.196.78:3001/taipower-autolabel-beta'}
+            style={{
+              height: 36,
+              width: 60,
+              padding: 0,
+              marginRight: 8,
+            }}
+          >
+            首頁
+          </Button>
           <CurrentTask store={store}/>
           {store.hasInterface('annotations:view-all') && (
-            <Tooltip title="View all annotations">
+            <Tooltip title="查看所有標註">
               <Button
                 className={'topbar__button'}
                 icon={<IconViewAll />}
                 type="text"
                 aria-label="View All"
                 onClick={annotationStore.toggleViewingAllAnnotations}
-                primary={ isViewAll }
+                primary={isViewAll}
                 style={{
                   height: 36,
                   width: 36,
@@ -45,12 +57,12 @@ export const TopBar = observer(({ store }) => {
             </Tooltip>
           )}
           {store.hasInterface('annotations:add-new') && (
-            <Tooltip placement="topLeft" title="Create a new annotation">
+            <Tooltip placement="topLeft" title="建立新的標註">
               <Button
                 icon={<LsPlus />}
                 className={'topbar__button'}
                 type="text"
-                aria-label="View All"
+                aria-label="Add New"
                 onClick={event => {
                   event.preventDefault();
                   const created = store.annotationStore.createAnnotation();
@@ -64,7 +76,6 @@ export const TopBar = observer(({ store }) => {
                   marginRight: 4,
                 }}
               />
-  
             </Tooltip>
           )}
           {!isViewAll && (
@@ -77,7 +88,21 @@ export const TopBar = observer(({ store }) => {
         </Elem>
       ) : (
         <>
-          <Elem name="group">
+          <Elem name="group" style={{ display: 'flex', alignItems: 'center' }}>
+            <Button
+              className="topbar__button"
+              type="text"
+              aria-label="Home"
+              onClick={() => window.location.href = 'http://140.127.196.78:3001/taipower-autolabel-beta'}
+              style={{
+                height: 36,
+                width: 60,
+                padding: 0,
+                marginRight: 8,
+              }}
+            >
+              Home
+            </Button>
             <CurrentTask store={store}/>
             {!isViewAll && (
               <Annotations
@@ -90,7 +115,6 @@ export const TopBar = observer(({ store }) => {
           </Elem>
           <Elem name="group">
             {!isViewAll && (
-    
               <Elem name="section">
                 <DynamicPreannotationsToggle />
               </Elem>

@@ -121,7 +121,7 @@ const OutlinerTreeComponent: FC<OutlinerTreeComponentProps> = observer(({ region
         </>
       ) : (
         <Elem name="empty">
-          Regions not added
+          區域尚未新增
         </Elem>
       )}
     </>

@@ -11,10 +11,12 @@ Function views
 Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
+Including another URLconffrom django.conf.urls.static import static
+
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from core import views
 from core.utils.common import collect_versions
 from core.utils.static_serve import serve
@@ -26,6 +28,7 @@ from django.views.generic.base import RedirectView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from .views import MediaFileView
 
 handler500 = 'core.views.custom_500'
 
@@ -104,6 +107,9 @@ urlpatterns = [
     path('django-rq/', include('django_rq.urls')),
     path('feature-flags/', views.feature_flags, name='feature_flags'),
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # 添加這一行來處理 /data/upload/ 下的檔案請求
+    re_path(r'^data/upload/(?P<path>.*)$', MediaFileView.as_view(), name='media_file'),
 ]
 
 if settings.DEBUG:
@@ -113,3 +119,7 @@ if settings.DEBUG:
         urlpatterns = [path('__debug__/', include(debug_toolbar.urls))] + urlpatterns
     except ImportError:
         pass
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

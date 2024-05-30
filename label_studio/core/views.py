@@ -36,6 +36,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from django.http import FileResponse, Http404
+from django.conf import settings
+import os
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -243,3 +251,13 @@ def feature_flags(request):
     }
 
     return HttpResponse('<pre>' + json.dumps(flags, indent=4) + '</pre>', status=200)
+
+class MediaFileView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, path, format=None):
+        file_path = os.path.join(settings.MEDIA_ROOT, settings.UPLOAD_DIR, path)
+        if os.path.exists(file_path):
+            return FileResponse(open(file_path, 'rb'))
+        else:
+            return Response(status=404)

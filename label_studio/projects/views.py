@@ -18,12 +18,12 @@ from rest_framework.exceptions import ValidationError
 logger = logging.getLogger(__name__)
 
 
-@login_required
+""" @login_required """
 def project_list(request):
     return render(request, 'projects/list.html')
 
 
-@login_required
+""" @login_required """
 def project_settings(request, pk, sub_path):
     return render(request, 'projects/settings.html')
 

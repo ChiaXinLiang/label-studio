@@ -76,6 +76,11 @@ class MLBackendListAPI(generics.ListCreateAPIView):
 
     def get_queryset(self):
         project_pk = self.request.query_params.get('project')
+
+        if project_pk is None:
+            project_pk = self.request.data.get('project')  # 嘗試從 POST 資料中取得 project 參數
+
+        print("Hello project_pk, ", project_pk)
         project = generics.get_object_or_404(Project, pk=project_pk)
 
         self.check_object_permissions(self.request, project)

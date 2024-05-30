@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+from rest_framework.permissions import AllowAny
 import json
 import logging
 import os
@@ -227,11 +228,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'core.middleware.DisableCSRF',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'core.middlewares.CustomCsrfExemptMiddleware',
     'core.middleware.XApiKeySupportMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -242,6 +245,20 @@ MIDDLEWARE = [
     'core.middleware.ContextLogMiddleware',
     'core.middleware.DatabaseIsLockedRetryMiddleware',
     'core.current_request.ThreadLocalMiddleware',
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'Access-Control-Allow-Origin',
+    'x-csrftoken',
+]
+CORS_ALLOWED_ORIGINS = [
+    "http://140.127.196.78:3001",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://140.127.196.78:3001",
 ]
 
 REST_FRAMEWORK = {
@@ -260,6 +277,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
 }
+
+# 允许对媒体文件的访问
+MEDIA_PERMISSION_CLASSES = [AllowAny]
+
 SILENCED_SYSTEM_CHECKS += ['rest_framework.W001']
 
 # CORS & Host settings
@@ -738,3 +759,10 @@ if ENABLE_CSP := get_bool_env('ENABLE_CSP', True):
 
 CLOUD_STORAGE_CHECK_FOR_RECORDS_PAGE_SIZE = get_env('CLOUD_STORAGE_CHECK_FOR_RECORDS_PAGE_SIZE', 10000)
 CLOUD_STORAGE_CHECK_FOR_RECORDS_TIMEOUT = get_env('CLOUD_STORAGE_CHECK_FOR_RECORDS_TIMEOUT', 60)
+
+from corsheaders.signals import check_request_enabled
+
+def cors_allow_any(sender, request, **kwargs):
+    return True
+
+check_request_enabled.connect(cors_allow_any)

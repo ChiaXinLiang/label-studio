@@ -4,7 +4,7 @@ import { getParent, types } from 'mobx-state-tree';
  * Project Store
  */
 const ProjectStore = types
-  .model('Project', {
+  .model('Project 123', {
     /**
      * Project ID
      */

@@ -52,26 +52,26 @@ export const ViewControls: FC<ViewControlsProps> = observer(({
   const getGroupingLabels = useCallback((value: GroupingOptions): LabelInfo => {
     switch (value) {
       case 'manual': return {
-        label: 'Group Manually',
-        selectedLabel: isFF(FF_DEV_3873) ? 'Manual' : 'Manual Grouping',
+        label: '手動分組',
+        selectedLabel: isFF(FF_DEV_3873) ? '手動' : '手動分組',
         icon: <IconList/>,
-        tooltip: 'Manually Grouped',
+        tooltip: '手動分組',
       };
       case 'label': return {
-        label: 'Group by Label',
+        label: '依標籤分組',
         selectedLabel: isFF(FF_DEV_3873) ?
           (isFF(FF_LSDV_4992) ? 'By Label' : 'Label')
           : 'Grouped by Label',
         icon: <IconTagAlt/>,
-        tooltip: 'Grouped by Label',
+        tooltip: '依標籤分組',
       };
       case 'type': return {
-        label: 'Group by Tool',
+        label: '依工具分組',
         selectedLabel: isFF(FF_DEV_3873) ?
           (isFF(FF_LSDV_4992) ? 'By Tool' : 'Tool')
           : 'Grouped by Tool',
         icon: <IconCursor/>,
-        tooltip: 'Grouped by Tool',
+        tooltip: '依工具分組',
       };
     }
   }, []);
@@ -79,13 +79,13 @@ export const ViewControls: FC<ViewControlsProps> = observer(({
   const getOrderingLabels = useCallback((value: OrderingOptions): LabelInfo => {
     switch (value) {
       case 'date': return {
-        label: 'Order by Time',
-        selectedLabel: 'By Time',
+        label: '依時間排序',
+        selectedLabel: '依時間',
         icon: <IconDetails/>,
       };
       case 'score': return {
-        label: 'Order by Score',
-        selectedLabel: 'By Score',
+        label: '依分數排序',
+        selectedLabel: '依分數',
         icon: <IconSpeed/>,
       };
     }
@@ -323,9 +323,9 @@ const ToggleRegionsVisibilityButton = observer<FC<ToggleRegionsVisibilityButton>
       disabled={isDisabled}
       onClick={toggleRegionsVisibility}
       mod={{ hidden: isAllHidden }}
-      aria-label={isAllHidden ? 'Show all regions' : 'Hide all regions'}
+      aria-label={isAllHidden ? 'Show all regions' : '隱藏所有區域'}
       icon={isAllHidden ? <IconOutlinerEyeClosed /> : <IconOutlinerEyeOpened/>}
-      tooltip={ isAllHidden ? 'Show all regions' : 'Hide all regions' }
+      tooltip={ isAllHidden ? 'Show all regions' : '隱藏所有區域' }
       tooltipTheme="dark"
     />
   );

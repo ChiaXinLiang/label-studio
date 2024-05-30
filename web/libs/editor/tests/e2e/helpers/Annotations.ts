@@ -18,7 +18,7 @@ class Annotations extends Helper {
   }
 
   async submitAnnotation() {
-    await this._clickButton('Submit');
+    await this._clickButton('Submit 456');
   }
 
   async updateAnnotation() {
@@ -26,7 +26,7 @@ class Annotations extends Helper {
   }
 
   async seeAnnotationSubmitted() {
-    await this._playwright.dontSeeElement(this._locateButton('Submit'));
+    await this._playwright.dontSeeElement(this._locateButton('Submit 456'));
     await this._playwright.seeElement(this._locateButton('Update'));
   }
 }

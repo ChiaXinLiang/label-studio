@@ -10,7 +10,7 @@ export const EditingHistory = observer(({ entity }) => {
   
   return (
     <Block name="history-buttons">
-      <Tooltip title="Undo">
+      <Tooltip title="恢復">
         <Elem
           tag={Button}
           name="action"
@@ -21,7 +21,7 @@ export const EditingHistory = observer(({ entity }) => {
           icon={<LsUndo />}
         />
       </Tooltip>
-      <Tooltip title="Redo">
+      <Tooltip title="重複">
         <Elem
           tag={Button}
           name="action"
@@ -32,7 +32,7 @@ export const EditingHistory = observer(({ entity }) => {
           icon={<LsRedo />}
         />
       </Tooltip>
-      <Tooltip title="Reset">
+      <Tooltip title="重置">
         <Elem
           tag={Button}
           name="action"

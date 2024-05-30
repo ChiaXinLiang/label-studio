@@ -506,8 +506,8 @@ const HtxVideoView = ({ item, store }) => {
                       inline={isFullScreen}
                       content={(
                         <Menu size="auto" closeDropdownOnItemClick={false}>
-                          <Menu.Item onClick={zoomIn}>Zoom In</Menu.Item>
-                          <Menu.Item onClick={zoomOut}>Zoom Out</Menu.Item>
+                          <Menu.Item onClick={zoomIn}>放大</Menu.Item>
+                          <Menu.Item onClick={zoomOut}>縮小</Menu.Item>
                           <Menu.Item onClick={zoomToFit}>Zoom To Fit</Menu.Item>
                           <Menu.Item onClick={zoomReset}>Zoom 100%</Menu.Item>
                         </Menu>

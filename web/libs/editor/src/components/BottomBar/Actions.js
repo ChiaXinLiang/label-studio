@@ -32,7 +32,7 @@ export const Actions = ({ store }) => {
           />
         </Tooltip>
       )}
-      <Tooltip placement="topLeft" title="Settings">
+{/*       <Tooltip placement="topLeft" title="設定">
         <Button
           icon={<LsSettingsAlt/>}
           type="text"
@@ -44,7 +44,7 @@ export const Actions = ({ store }) => {
             padding: 0,
           }}
         />
-      </Tooltip>
+      </Tooltip> */}
 
       {store.hasInterface('ground-truth') && <GroundTruth entity={entity}/>}
 

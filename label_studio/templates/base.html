@@ -45,7 +45,7 @@
   </script>
 
   {% block head %}
-    <title>Label Studio</title>
+    <title>台電-AI工安平台</title>
   {% endblock %}
 
   {% block head-toast %}
@@ -124,7 +124,7 @@
 
 <div id="dynamic-content">
   <script nonce="{{request.csp_nonce}}">
-      applyCsrf();
+      // applyCsrf();
 
       $('.message .close').on('click', function () {
            $(this).closest('.message').transition('fade');

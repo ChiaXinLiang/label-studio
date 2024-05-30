@@ -78,7 +78,7 @@ const _Tool = types
   })
   .views(self => ({
     get viewTooltip() {
-      return 'Rectangle';
+      return '矩形';
     },
     get iconComponent() {
       return self.dynamic
@@ -93,7 +93,7 @@ const _Tool3Point = types
   })
   .views(self => ({
     get viewTooltip() {
-      return '3 Point Rectangle';
+      return '三點矩形';
     },
     get iconComponent() {
       return self.dynamic

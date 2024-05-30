@@ -84,6 +84,12 @@ class AnnotationSerializer(FlexFieldsModelSerializer):
         return data
 
     def get_created_username(self, annotation):
+
+        from django.contrib.auth import get_user_model
+        from users.functions import login
+        email = 'yillkid@gmail.com'  # Replace with an email already in the database
+        user = get_user_model().objects.get(email=email)
+
         user = annotation.completed_by
         if not user:
             return ''
@@ -310,6 +316,9 @@ class BaseTaskSerializerBulk(serializers.ListSerializer):
         validated_tasks = validated_data
         logging.info(f'Try to serialize tasks with annotations, data len = {len(validated_data)}')
         user = self.context.get('user', None)
+
+        print("Hello user", user)
+
         default_user = user or self.project.created_by
         ff_user = self.project.organization.created_by
 
@@ -578,6 +587,12 @@ class AnnotationDraftSerializer(ModelSerializer):
     created_ago = serializers.CharField(default='', read_only=True, help_text='Delta time from creation time')
 
     def get_created_username(self, draft):
+
+        from django.contrib.auth import get_user_model
+        from users.functions import login
+        email = 'yillkid@gmail.com'  # Replace with an email already in the database
+        user = get_user_model().objects.get(email=email)
+
         user = draft.user
         if not user:
             return ''

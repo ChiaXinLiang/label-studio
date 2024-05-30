@@ -39,7 +39,7 @@ const _Tool = types
       },
 
       get viewTooltip() {
-        return 'Polygon region';
+        return '多邊形區域';
       },
       get iconComponent() {
         return self.dynamic

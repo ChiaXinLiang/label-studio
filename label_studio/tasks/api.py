@@ -140,13 +140,15 @@ class TaskListAPI(DMTaskListAPI):
     ),
 )
 class TaskAPI(generics.RetrieveUpdateDestroyAPIView):
-    parser_classes = (JSONParser, FormParser, MultiPartParser)
+    parser_classes = (JSONParser, FormParser, MultiPartParser)  
     permission_required = ViewClassPermission(
         GET=all_permissions.tasks_view,
         PUT=all_permissions.tasks_change,
         PATCH=all_permissions.tasks_change,
         DELETE=all_permissions.tasks_delete,
     )
+
+    print("Hello........ TaskAPI ")
 
     def initial(self, request, *args, **kwargs):
         self.task = self.get_object()
@@ -180,6 +182,7 @@ class TaskAPI(generics.RetrieveUpdateDestroyAPIView):
         }
 
     def get(self, request, pk):
+        print("Hello........ TaskAPI get")
         context = self.get_retrieve_serializer_context(request)
         context['project'] = project = self.task.project
 
@@ -193,7 +196,10 @@ class TaskAPI(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer_class()(
             self.task, many=False, context=context, expand=['annotations.completed_by']
         )
+
         data = serializer.data
+
+        print("Hello........ TaskAPI get data", data)
         return Response(data)
 
     def get_queryset(self):

@@ -99,7 +99,7 @@ const HistoryTab: FC<any> = inject('store')(observer(({ store, currentEntity }) 
         ) : (
           <Elem name="section-tab">
             <Elem name="section-head">
-              Annotation History
+              標註歷史
               <span>#{currentEntity.pk ?? currentEntity.id}</span>
             </Elem>
             <Elem name="section-content">
@@ -119,7 +119,7 @@ const InfoTab: FC<any> = inject('store')(
       <>
         <Block name="info">
           <Elem name="section-tab">
-            <Elem name="section-head">Selection Details</Elem>
+            <Elem name="section-head">選擇詳情</Elem>
             <RegionsPanel regions={selection}/>
           </Elem>
         </Block>

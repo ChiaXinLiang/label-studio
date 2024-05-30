@@ -21,7 +21,7 @@ const _Tool = types
       };
     },
     get viewTooltip() {
-      return 'Key Point';
+      return '關鍵點';
     },
     get iconComponent() {
       return self.dynamic
