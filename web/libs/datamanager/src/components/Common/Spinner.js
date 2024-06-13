@@ -34,7 +34,10 @@ export const Spinner = injector(({ SDK, visible = true, ...props }) => {
 
   const ExternalSpinner = SDK?.spinner;
 
-  return visible ? (
+  // Disabled spinner
+  return null;
+
+  /* return visible ? (
     <div
       {...props}
       style={{ width: size, height: size }}
@@ -53,5 +56,5 @@ export const Spinner = injector(({ SDK, visible = true, ...props }) => {
         </div>
       )}
     />
-  ) : null;
+  ) : null; */
 });
