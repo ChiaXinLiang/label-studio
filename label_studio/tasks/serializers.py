@@ -317,8 +317,6 @@ class BaseTaskSerializerBulk(serializers.ListSerializer):
         logging.info(f'Try to serialize tasks with annotations, data len = {len(validated_data)}')
         user = self.context.get('user', None)
 
-        print("Hello user", user)
-
         default_user = user or self.project.created_by
         ff_user = self.project.organization.created_by
 

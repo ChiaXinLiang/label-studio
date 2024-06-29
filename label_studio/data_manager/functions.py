@@ -324,12 +324,10 @@ def evaluate_predictions(tasks):
         return
 
     project = tasks[0].project
-
     backend = project.ml_backend
 
     if backend:
         return backend.predict_tasks(tasks=tasks)
-
 
 def filters_ordering_selected_items_exist(data):
     return data.get('filters') or data.get('ordering') or data.get('selectedItems')

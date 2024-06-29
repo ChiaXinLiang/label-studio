@@ -273,6 +273,7 @@ class MLBackend(models.Model):
         tasks = tasks.annotate(predictions_count=Count('predictions')).exclude(
             Q(predictions_count__gt=0) & Q(predictions__model_version=model_version)
         )
+
         if not tasks.exists():
             logger.debug(f'All tasks already have prediction from model version={self.model_version}')
             return model_version

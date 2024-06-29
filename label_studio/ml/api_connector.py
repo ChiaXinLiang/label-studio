@@ -225,7 +225,7 @@ class MLApi(BaseHTTPAPI):
 
     def make_predictions(self, tasks, project, context=None):
         request = self._prep_prediction_req(tasks, project, context=context)
-        return self._request(PREDICT_URL, request, verbose=False, timeout=TIMEOUT_PREDICT)
+        return self._request(PREDICT_URL, request, verbose=True, timeout=TIMEOUT_PREDICT)
 
     def health(self):
         return self._request(HEALTH_URL, method='GET', timeout=TIMEOUT_HEALTH)
