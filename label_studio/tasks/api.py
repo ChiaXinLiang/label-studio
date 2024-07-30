@@ -181,6 +181,7 @@ class TaskAPI(generics.RetrieveUpdateDestroyAPIView):
 
     def get(self, request, pk):
         context = self.get_retrieve_serializer_context(request)
+
         context['project'] = project = self.task.project
 
         # get prediction
@@ -193,7 +194,8 @@ class TaskAPI(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer_class()(
             self.task, many=False, context=context, expand=['annotations.completed_by']
         )
-        data = serializer.data
+        data = serializer.data        # DEBUG, key point?
+
 
         return Response(data)
 

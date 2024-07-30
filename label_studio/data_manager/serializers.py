@@ -235,6 +235,11 @@ class DataManagerTaskSerializer(TaskSerializer):
     def to_representation(self, obj):
         """Dynamically manage including of some fields in the API result"""
         ret = super(DataManagerTaskSerializer, self).to_representation(obj)
+
+        # Set drafts to annotations
+        if (ret["annotations"] == []):
+            ret["annotations"] = ret["drafts"]
+
         if not self.context.get('annotations'):
             ret.pop('annotations', None)
         if not self.context.get('predictions'):

@@ -27,7 +27,7 @@ export const TopBar = observer(({ store }) => {
             className="topbar__button"
             type="text"
             aria-label="Home"
-            onClick={() => window.location.href = 'http://140.127.196.78:3001/taipower-autolabel-beta'}
+            onClick={() => window.location.href = 'https://118.163.118.14/taipower-autolabel'}
             style={{
               height: 36,
               width: 60,
@@ -93,7 +93,7 @@ export const TopBar = observer(({ store }) => {
               className="topbar__button"
               type="text"
               aria-label="Home"
-              onClick={() => window.location.href = 'http://140.127.196.78:3001/taipower-autolabel-beta'}
+              onClick={() => window.location.href = 'https://118.163.118.14/taipower-autolabel'}
               style={{
                 height: 36,
                 width: 60,

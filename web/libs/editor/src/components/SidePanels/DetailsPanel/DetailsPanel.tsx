@@ -113,7 +113,7 @@ const HistoryTab: FC<any> = inject('store')(observer(({ store, currentEntity }) 
 }));
 
 
-const InfoTab: FC<any> = inject('store')(
+/* const InfoTab: FC<any> = inject('store')(
   observer(({ selection }) => {
     return (
       <>
@@ -123,6 +123,65 @@ const InfoTab: FC<any> = inject('store')(
             <RegionsPanel regions={selection}/>
           </Elem>
         </Block>
+      </>
+    );
+  }),
+); */
+
+const InfoTab: FC<any> = inject('store')(
+  observer(({ selection }) => {
+    const handleScreenshot = () => {
+      const region = selection.list[0];
+      if (!region) {
+        console.warn('No regions found in selection');
+        return;
+      }
+      const { x, y, width, height } = region;
+      const allImages = Array.from(document.querySelectorAll('img'));
+
+      const searchTerm = '/data/upload/';
+      const targetImage = allImages.find(img => img.getAttribute('src').includes(searchTerm));
+
+      if (targetImage) {
+        console.log('Found target image:', targetImage);
+        const newCanvas = document.createElement('canvas');
+        newCanvas.width = targetImage.naturalWidth;
+        newCanvas.height = targetImage.naturalHeight;
+        const newContext = newCanvas.getContext('2d');
+
+        if (newContext) {
+          let wScale = targetImage.naturalWidth * (width/100)
+          let hScale = targetImage.naturalHeight * (height/100)
+          newContext.drawImage(targetImage, 0, 0, 
+            targetImage.naturalWidth, targetImage.naturalHeight/2, 
+            0, 0, wScale, hScale)
+          const imageUrl = newCanvas.toDataURL('image/png');
+          const newWindow = window.open('', '_blank');
+          if (newWindow) {
+            newWindow.document.write(`<img src="${imageUrl}" alt="Screenshot">`);
+            newWindow.document.close();
+          }
+        }
+      } else {
+        console.log('Target image not found');
+      }
+    };
+
+    return (
+      <>
+        <Block name="info">
+          <Elem name="section-tab">
+            <Elem name="section-head">
+              選擇詳情
+              <button onClick={handleScreenshot} style={{ marginLeft: '10px' }}>
+                擷圖
+              </button>
+            </Elem>
+            <RegionsPanel regions={selection} />
+          </Elem>
+        </Block>
+        {/* 假設這是用來顯示圖像的 canvas 元素 */}
+        <canvas id="myCanvas" />
       </>
     );
   }),

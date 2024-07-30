@@ -279,6 +279,7 @@ class MLBackend(models.Model):
             return model_version
         tasks_ser = TaskSimpleSerializer(tasks, many=True).data
         ml_api_result = self.api.make_predictions(tasks_ser, self.project)
+        
         if ml_api_result.is_error:
             logger.info(f'Prediction not created for project {self}: {ml_api_result.error_message}')
             return
