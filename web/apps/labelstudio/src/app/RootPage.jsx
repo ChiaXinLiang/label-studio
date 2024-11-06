@@ -6,14 +6,17 @@ export const RootPage = ({ content }) => {
   const opened = pinned && localStorage.getItem("sidebar-opened") === "true";
 
   return (
-    <Menubar
-      enabled={true}
-      defaultOpened={opened}
-      defaultPinned={pinned}
-      onSidebarToggle={(visible) => localStorage.setItem("sidebar-opened", visible)}
-      onSidebarPin={(pinned) => localStorage.setItem("sidebar-pinned", pinned)}
-    >
+    // <Menubar
+    //   enabled={true}
+    //   defaultOpened={opened}
+    //   defaultPinned={pinned}
+    //   onSidebarToggle={(visible) => localStorage.setItem("sidebar-opened", visible)}
+    //   onSidebarPin={(pinned) => localStorage.setItem("sidebar-pinned", pinned)}
+    // >
+    //   <ProjectRoutes content={content} />
+    // </Menubar>
+    <>
       <ProjectRoutes content={content} />
-    </Menubar>
+    </>
   );
 };
