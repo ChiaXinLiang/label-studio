@@ -38,7 +38,7 @@
   </script>
 
   {% block page_labeling %}
-    <title>Label Studio</title>
+    <title>台電-AI工安平台</title>
     <link href="{{settings.HOSTNAME}}{% static 'images/favicon.ico' %}" rel="shortcut icon"/>
   {% endblock %}
 
@@ -129,7 +129,7 @@
   <script src="{{settings.HOSTNAME}}{% static 'js/helpers.js' %}"></script>
   <script src="{{settings.HOSTNAME}}{% static 'js/Toast.min.js' %}"></script>
   <script nonce="{{request.csp_nonce}}">
-      applyCsrf();
+      // applyCsrf();
 
       $('.message .close').on('click', function () {
            $(this).closest('.message').transition('fade');
