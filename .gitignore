@@ -82,3 +82,5 @@ docker-compose.override.yml
 .netlify
 
 env
+.github
+web/dist
